@@ -1,8 +1,6 @@
 import * as actionTypes from './actionTypes';
-import axios from "../../_utils/axios";
 
 export const start_get_todoitems_flow = () => {
-    console.log("start");
     return {
         type : actionTypes.START_GET_TODOITEMS_FLOW
     };
@@ -14,3 +12,17 @@ export const end_get_todositems_flow = ( toDoItems) => {
         toDoItems : toDoItems
     };
 }
+
+export const error_get_todoitems_flow = (error) => {
+    return {
+        type : actionTypes.ERROR_GET_TODOITEMS_FLOW,
+        error : error
+    };
+}
+export const start_put_todoItem_api = ( id, checked ) => {
+    return {
+        type: actionTypes.START_PUT_TODOITEM_API,
+        id: id,
+        checked: checked
+    }
+};
