@@ -19,9 +19,10 @@ export const error_get_todoitems_flow = (error) => {
         error : error
     };
 }
-export const start_put_todoItem_api = ( id, checked ) => {
+
+export const START_MARK_TODOITEM_API = ( id, checked ) => {
     return {
-        type: actionTypes.START_PUT_TODOITEM_API,
+        type: actionTypes.START_MARK_TODOITEM_API,
         id: id,
         checked: checked
     }

@@ -3,10 +3,18 @@ import React, { Fragment } from 'react';
 import { ToDoItem } from './ToDoItem';
 import { Button } from '../Button';
 export const ToDoItems = (props) => {
-    const { toDoItems, onInputCheckBoxChangeHandler, onMarkAsSelectedHandler } = props;
+    const { toDoItems, showActive, showCompleted, onInputCheckBoxChangeHandler, onMarkAsSelectedHandler } = props;
     
     const renderToDoItems = () => {    
-        return toDoItems.map(({id, title, description, tag, dueDate, member, isActive}) => {
+        let filterToDoItem;
+        if ( showActive === true) {
+            filterToDoItem = toDoItems.filter(({ isActive }) => isActive === 1 );
+        }
+        else if ( showCompleted === true) {
+            filterToDoItem = toDoItems.filter(({ isActive }) => isActive === 0 );
+        }
+
+        return filterToDoItem.map(({id, title, description, tag, dueDate, member, isActive}) => {
 
                     return <ToDoItem key={id} 
                                      id={id}
@@ -24,9 +32,14 @@ export const ToDoItems = (props) => {
          <Fragment>
             { renderToDoItems() }
             <Button
-                    onClick ={onMarkAsSelectedHandler}
-                    title   ='Mark Done Selected'                
-                />
+                onClick ={onMarkAsSelectedHandler}
+                title   ='Mark Done Selected'                
+            />
+            <br></br>
+            <Button
+                onClick ={onMarkAsSelectedHandler}
+                title   ='Delete Selected'                
+            />
         </Fragment>
     )
 } 

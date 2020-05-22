@@ -1,0 +1,21 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap; 
+    flex: 1;
+    
+    .form-bottom{
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .is-danger{
+        color: #ff3860; 
+        text-align: left !important;
+        padding-left: 10px;
+        display: block;
+        font-size: 0.75rem;
+        margin: 0.25rem;
+    }  
+}
