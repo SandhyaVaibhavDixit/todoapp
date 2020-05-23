@@ -43,21 +43,16 @@ const end_mark_todoItems_flow = ( state, action ) => {
                         }
                     });
 
-                    updateState(state, {
+                    return updateState(state, {
                         toDoItems: updatedToDoItems }); 
-                    break;
-
         case 'delete': 
                     const toDoItems = state.toDoItems.filter(todoItem => action.checkedItems.includes(todoItem.id) === false );
-                    
-                    updateState(state, {
+                    console.log(toDoItems);
+                    return updateState(state, {
                         toDoItems: toDoItems
                     }); 
-                    break;
         default: return state;
     }
-
-    return state;
 }
 
 export const reducer = ( state = initialState, action ) => {

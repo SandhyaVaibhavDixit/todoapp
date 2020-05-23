@@ -57,11 +57,11 @@ const ToDoList = ( props ) => {
     const onMarkAsSelectedHandler = ( markAction ) => {
         
         UpdateToDoItems(markAction, state.toDoItems, checkedItems);
-        // dispatch({
-        //     type: actionTypes.END_MARK_TODOITEMS_FLOW,
-        //     actionType: markAction,
-        //     checkedItems: checkedItems
-        // });
+        dispatch({
+            type: actionTypes.END_MARK_TODOITEMS_FLOW,
+            actionType: markAction,
+            checkedItems: checkedItems
+        });
     }
 
     const onActiveClickHandler = () => {
