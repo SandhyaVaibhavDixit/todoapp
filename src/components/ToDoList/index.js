@@ -22,9 +22,6 @@ const ToDoList = ( props ) => {
     const [ state, dispatch ] = useReducer(reducer, initialState);
     const [ showActive, setShowActive ] = useState(true);
     const [ showCompleted, setShowCompleted ] = useState(false);
-
-    const [, updateState] = React.useState();
-    const forceUpdate = React.useCallback(() => updateState({}), []);
     
     useEffect(() => {
         const getToDOItems = async() => {
@@ -65,7 +62,6 @@ const ToDoList = ( props ) => {
         //     actionType: markAction,
         //     checkedItems: checkedItems
         // });
-        forceUpdate();
     }
 
     const onActiveClickHandler = () => {
@@ -106,6 +102,7 @@ const ToDoList = ( props ) => {
         <div className='list'>
             <br></br>
             <Button
+                buttonClass='add-task'
                 onClick ={onShowAddTaskClickkHandler}
                 title   ='Add Task'                
             />

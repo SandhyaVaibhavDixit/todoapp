@@ -13,6 +13,17 @@
         justify-content: space-around;
     }
 
+    .add-task {
+        background-color: #00FFFF;
+    }
+    .mark-done {
+        background-color: greenyellow;
+    }
+
+    .mark-delete {
+        background-color: red;
+    }
+
     .active {
         background-color: orange;
     }

@@ -14,8 +14,7 @@ export const AddItemForm = [
         elementType: 'textarea',
         config: {
             placeholder: 'Add some description about the file'
-        }
-    },
+        }    },
     {
         name: 'tag',
         label: 'Tag',
@@ -23,8 +22,8 @@ export const AddItemForm = [
         config: {
             type: 'text',
             placeholder: 'Tag'
-        }
-    },
+        } 
+     },
     {
         name: 'dueDate',
         label: 'Due Date',
@@ -33,11 +32,7 @@ export const AddItemForm = [
             type: 'date',
             placeholder: 'mm / dd / yyyy'
         },
-        value: '',
-        validation: {
-           required: true,
-        //   isDate: true
-        }, 
+        value: ''
     },
     {
         name: 'member',
@@ -47,10 +42,6 @@ export const AddItemForm = [
           type: 'email',
           placeholder: 'Your E-Mail'
         },
-        value: '',
-        validation: {
-          required: true,
-          isEmail: true
-        }
+        value: ''
     }  
 ] 

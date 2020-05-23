@@ -35,6 +35,7 @@ export const TextInput = (props) => {
 
     const onChange = ({target: {value}}) => {
         const isValid = checkValidity(value, validation);
+
         setState({ value, isValid });
     }
 

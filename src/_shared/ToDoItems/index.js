@@ -28,15 +28,22 @@ export const ToDoItems = (props) => {
                 });
     };
 
+    const renderMarkDoneButton = () =>{
+        return showActive === true ?
+                <Button
+                    buttonClass='mark-done'
+                    onClick ={() => onMarkAsSelectedHandler('done')}
+                    title   ='Mark Done Selected'                
+                />:
+                '';
+    }
      return (
          <Fragment>
             { renderToDoItems() }
-            <Button
-                onClick ={() => onMarkAsSelectedHandler('done')}
-                title   ='Mark Done Selected'                
-            />
+            { renderMarkDoneButton() }
             <br></br>
             <Button
+                buttonClass='mark-delete'
                 onClick ={() => onMarkAsSelectedHandler('delete')}
                 title   ='Delete Selected'                
             />
