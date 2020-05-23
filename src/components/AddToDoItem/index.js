@@ -5,7 +5,6 @@ import { AddItemForm as formInputs } from '../../_utils/Form/AddItemForm';
 import { AddForm } from '../../_shared/AddForm';
 import { create } from "../../_services/ToDoItemServices";
 
-
 import './index.scss';
 
 const AddToDoItem = (props) => {
@@ -39,6 +38,7 @@ const AddToDoItem = (props) => {
             </div>
             <AddForm
                 formInputs={formInputs}
+                data={state}
                 updateParentState={updateState}
                 onSubmitHandler={onSubmitHandler}
             />

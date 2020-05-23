@@ -4,7 +4,7 @@ import { DateInput } from '../DateInput';
 import './index.scss';
 
 export const InputElements = ( props ) => {
-    const { name, label, elementType, placeholder, value, validation, onChange } = props;
+    const { name, label, elementType, placeholder, value, validation, onChange, onUpdateDate } = props;
 
     switch ( elementType ) { 
         case ( 'textarea' ):
@@ -24,6 +24,7 @@ export const InputElements = ( props ) => {
                         value ={value}
                         label ={label}
                         onUpdate ={onChange}
+                        onUpdateDate={onUpdateDate}
                     />
         case ( 'input' ):
         default:

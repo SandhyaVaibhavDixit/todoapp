@@ -30,8 +30,13 @@ const useForm = (callback, formInputs) => {
     setValues(values => ({ ...values, [name]: value }));
   };
 
+  const onUpdateDate = (date) =>{
+    setValues(values => ({ ...values, 'dueDate': date }));
+  }
+
   return {
     onChange,
+    onUpdateDate,
     onSubmit,
     values,
     errors,

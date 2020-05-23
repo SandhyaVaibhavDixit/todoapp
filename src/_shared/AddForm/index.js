@@ -21,6 +21,7 @@ export const AddForm = ({formInputs, updateParentState, onSubmitHandler}) => {
         values,
         errors,
         onChange,
+        onUpdateDate,
         onSubmit,
     } = useForm(onFormSubmit, formInputs);
 
@@ -42,6 +43,7 @@ export const AddForm = ({formInputs, updateParentState, onSubmitHandler}) => {
                                 placeholder={config.placeholder}
                                 validation={validation}
                                 onChange={onChange}
+                                onUpdateDate={onUpdateDate}
                             />
                             {errors[name] && (
                                 <p className="is-danger">{errors[name]}</p>

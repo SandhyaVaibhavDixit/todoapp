@@ -20,10 +20,9 @@ export const error_get_todoitems_flow = (error) => {
     };
 }
 
-export const START_MARK_TODOITEM_API = ( id, checked ) => {
+export const end_mark_todoitems_flow = ( actionType ) => {
     return {
-        type: actionTypes.START_MARK_TODOITEM_API,
-        id: id,
-        checked: checked
+        type: actionTypes.END_MARK_TODOITEMS_FLOW,
+        actionType: actionType
     }
 };

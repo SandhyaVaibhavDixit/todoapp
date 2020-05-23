@@ -1,8 +1,9 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import axios from "axios";
+import { getAll } from "../../_services/ToDoItemServices";
 import { withRouter } from 'react-router'; 
 import { Button } from '../../_shared/Button';
 import { reducer } from "../../store/reducers";
+import { UpdateToDoItems } from '../../_utils/MarkToDoItems';
 
 import * as actionTypes from "../../store/actions/actionTypes";
 import './index.scss';
@@ -15,25 +16,30 @@ const ToDoList = ( props ) => {
         loading: true,
         error:''
     };
-     
+
+    let checkedItems = [];
+
     const [ state, dispatch ] = useReducer(reducer, initialState);
     const [ showActive, setShowActive ] = useState(true);
     const [ showCompleted, setShowCompleted ] = useState(false);
 
+    const [, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
+    
     useEffect(() => {
         const getToDOItems = async() => {
             dispatch({ type: actionTypes.START_GET_TODOITEMS_FLOW});
-            await axios.get('https://teronext-node-api.herokuapp.com/todos')
-                        .then(response => {
-                            dispatch({ 
-                                type: actionTypes.END_GET_TODOITEMS_FLOW, 
-                                response});
-                        })
-                        .catch(error => {
-                            dispatch({ 
-                                type: actionTypes.ERROR_GET_TODOITEMS_FLOW, 
-                                error: error});
-                        });
+            await getAll()
+                    .then(response => {
+                        dispatch({ 
+                            type: actionTypes.END_GET_TODOITEMS_FLOW, 
+                            response});
+                    })
+                    .catch(error => {
+                        dispatch({ 
+                            type: actionTypes.ERROR_GET_TODOITEMS_FLOW, 
+                            error: error});
+                    });
             }
 
         getToDOItems();
@@ -41,32 +47,25 @@ const ToDoList = ( props ) => {
 
     const onInputCheckBoxChangeHandler = (e) => {
         const { checked , value } = e.target;
-        dispatch({
-            type: actionTypes.START_MARK_TODOITEM_API,
-            id: value,
-            checked: checked
-        });
+        const id = parseInt(value);
+
+        if (checked === true) {
+            checkedItems = [...checkedItems, id];
+        }
+        else {
+            checkedItems = checkedItems.filter( checkedItem => checkedItem !== id );
+        }
     }
 
-    const onMarkAsSelectedHandler = () => {
-    } 
-
-    const renderList = () => {
-        const isLoading = state.loading || ( state.error && Boolean(state.error.length !== 0)) ;
-
-        const list = isLoading ? 
-            ( <div> Loading.....</div>)
-            :    
-            (
-                <ToDoItems 
-                    toDoItems={state.toDoItems}
-                    showActive={showActive}
-                    showCompleted={showCompleted}
-                    onInputCheckBoxChangeHandler={onInputCheckBoxChangeHandler}
-                    onMarkAsSelectedHandler={onMarkAsSelectedHandler}/>                                    
-            );
-
-            return list;
+    const onMarkAsSelectedHandler = ( markAction ) => {
+        
+        UpdateToDoItems(markAction, state.toDoItems, checkedItems);
+        // dispatch({
+        //     type: actionTypes.END_MARK_TODOITEMS_FLOW,
+        //     actionType: markAction,
+        //     checkedItems: checkedItems
+        // });
+        forceUpdate();
     }
 
     const onActiveClickHandler = () => {
@@ -83,6 +82,26 @@ const ToDoList = ( props ) => {
          props.history.push('/addToDoItem');
     }
 
+    const renderList = () => {
+        const { loading, error, toDoItems } = state;
+        const hasError =  ( error && Boolean(error.length !== 0));
+        const isLoading = loading || hasError ;
+
+        const list = isLoading ? 
+            ( <div> Loading.....</div>)
+            :    
+            (
+                <ToDoItems 
+                    toDoItems={toDoItems}
+                    showActive={showActive}
+                    showCompleted={showCompleted}
+                    onInputCheckBoxChangeHandler={onInputCheckBoxChangeHandler}
+                    onMarkAsSelectedHandler={onMarkAsSelectedHandler}/>                                    
+            );
+
+            return list;
+    }
+
     return(
         <div className='list'>
             <br></br>
@@ -96,12 +115,14 @@ const ToDoList = ( props ) => {
              <div className='toggle-active'>
                 <div>
                     <Button
+                        buttonClass={showActive === true ? 'active' : 'not-active'}
                         onClick ={onActiveClickHandler}
                         title   ='Active'                
                     />
                 </div>
                 <div>
                     <Button
+                        buttonClass={showCompleted === true ? 'completed' : 'not-completed'}
                         onClick ={onCompletedClickHandler}
                         title   ='Completed'                
                     />

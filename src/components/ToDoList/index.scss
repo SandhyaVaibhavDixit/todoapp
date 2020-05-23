@@ -1,5 +1,5 @@
 .list {
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -11,5 +11,43 @@
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+    }
+
+    .active {
+        background-color: orange;
+    }
+
+    .not-active {
+        border: 1px solid orange;
+        color: orange;
+        background-color: white;
+    }
+
+    .completed {
+        background-color: orange;
+    }
+
+    .not-completed {
+        border: 1px solid orange;
+        color: orange;
+        background-color: white;
+    }
+}
+
+@media (min-width: 350px) {
+    .list {
+        width: 250px;
+    }
+}
+
+@media (min-width: 500px) {
+    .list {
+        width: 350px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .list {
+        width: 500px;
     }
 }

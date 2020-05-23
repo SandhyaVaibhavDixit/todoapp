@@ -10,7 +10,8 @@ export const DateInput = (props) =>{
         value: defaultValue,
         label,
         placeholder,
-        onUpdate
+        onUpdate,
+        onUpdateDate
     } = props;
 
     const initialState = {
@@ -21,11 +22,13 @@ export const DateInput = (props) =>{
     const setState = (state) => updateState(prevState => ({...prevState, ...state}));
 
     const onBlur = (e) => {
-        onUpdate(e)
+        console.log('blur' + e);
+        onUpdate(e);
     }
 
     const onChange = (date) => {
         setState({ value: date });
+        onUpdateDate(date);
     }
 
     const renderDateElment = () => {

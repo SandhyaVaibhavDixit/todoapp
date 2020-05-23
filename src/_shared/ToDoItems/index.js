@@ -32,12 +32,12 @@ export const ToDoItems = (props) => {
          <Fragment>
             { renderToDoItems() }
             <Button
-                onClick ={onMarkAsSelectedHandler}
+                onClick ={() => onMarkAsSelectedHandler('done')}
                 title   ='Mark Done Selected'                
             />
             <br></br>
             <Button
-                onClick ={onMarkAsSelectedHandler}
+                onClick ={() => onMarkAsSelectedHandler('delete')}
                 title   ='Delete Selected'                
             />
         </Fragment>

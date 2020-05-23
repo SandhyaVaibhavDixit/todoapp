@@ -15,4 +15,7 @@ export const create = data => {
 export const remove = id => {
     return http.delete(`/todos/${id}`);
 };
-  
+
+export const update = (id, data) => {
+    return http.put(`/todos/${id}`, data);
+}
