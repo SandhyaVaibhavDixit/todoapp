@@ -35,7 +35,7 @@ const end_mark_todoItems_flow = ( state, action ) => {
                         if (action.checkedItems.includes(toDoItem.id)){
                             return {
                                 ...toDoItem, 
-                                isActive: false
+                                isActive: 0
                             }
                         }
                         else {
@@ -43,16 +43,30 @@ const end_mark_todoItems_flow = ( state, action ) => {
                         }
                     });
 
+                    console.log(updatedToDoItems);
                     return updateState(state, {
                         toDoItems: updatedToDoItems }); 
         case 'delete': 
                     const toDoItems = state.toDoItems.filter(todoItem => action.checkedItems.includes(todoItem.id) === false );
-                    console.log(toDoItems);
                     return updateState(state, {
                         toDoItems: toDoItems
                     }); 
         default: return state;
     }
+}
+
+const start_set_active_api = ( state, action) => {
+    return updateState( state, {
+        showActive: action.showActive,
+        showCompleted: action.showCompleted
+    });
+}
+
+const start_set_completed_api = ( state, action) => {
+    return updateState( state, {
+        showActive: action.showActive,
+        showCompleted: action.showCompleted
+    });
 }
 
 export const reducer = ( state = initialState, action ) => {
@@ -62,6 +76,9 @@ export const reducer = ( state = initialState, action ) => {
         case actionTypes.ERROR_GET_TODOITEMS_FLOW: return error_get_todoItems_flow( state, action );
         
         case actionTypes.END_MARK_TODOITEMS_FLOW: return end_mark_todoItems_flow( state, action )
+
+        case actionTypes.START_SET_ACTIVE_API: return start_set_active_api( state, action);
+        case actionTypes.START_SET_COMPLETED_API: return start_set_completed_api( state, action);
         default: return state;
     }
 };

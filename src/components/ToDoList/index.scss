@@ -14,31 +14,52 @@
     }
 
     .add-task {
-        background-color: #00FFFF;
+        display: flex;
+        flex-direction: initial;
+        justify-content: center;
+        background-color: #30c2f9;
     }
     .mark-done {
-        background-color: greenyellow;
+        display: flex;
+        flex-direction: initial;
+        justify-content: center;
+        background-color: #30f9b0;
     }
 
     .mark-delete {
+        display: flex;
+        flex-direction: initial;
+        justify-content: center;
         background-color: red;
     }
 
     .active {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         background-color: orange;
     }
 
     .not-active {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         border: 1px solid orange;
         color: orange;
         background-color: white;
     }
 
     .completed {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         background-color: orange;
     }
 
     .not-completed {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         border: 1px solid orange;
         color: orange;
         background-color: white;

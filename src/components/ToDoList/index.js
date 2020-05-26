@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { getAll } from "../../_services/ToDoItemServices";
 import { withRouter } from 'react-router'; 
 import { Button } from '../../_shared/Button';
@@ -14,33 +14,36 @@ const ToDoList = ( props ) => {
     const initialState = {
         toDoItems: {},
         loading: true,
-        error:''
+        error:'',
+        showActive: true,
+        showCompleted: false
     };
 
     let checkedItems = [];
-
     const [ state, dispatch ] = useReducer(reducer, initialState);
-    const [ showActive, setShowActive ] = useState(true);
-    const [ showCompleted, setShowCompleted ] = useState(false);
     
-    useEffect(() => {
-        const getToDOItems = async() => {
-            dispatch({ type: actionTypes.START_GET_TODOITEMS_FLOW});
-            await getAll()
-                    .then(response => {
-                        dispatch({ 
-                            type: actionTypes.END_GET_TODOITEMS_FLOW, 
-                            response});
-                    })
-                    .catch(error => {
-                        dispatch({ 
-                            type: actionTypes.ERROR_GET_TODOITEMS_FLOW, 
-                            error: error});
-                    });
-            }
+    const GET_TODOITEM_LISTENER = () =>{
+        useEffect(() => {
+            const getToDoItems = async() => {
+                dispatch({ type: actionTypes.START_GET_TODOITEMS_FLOW});
+                await getAll()
+                        .then(response => {
+                            dispatch({ 
+                                type: actionTypes.END_GET_TODOITEMS_FLOW, 
+                                response});
+                        })
+                        .catch(error => {
+                            dispatch({ 
+                                type: actionTypes.ERROR_GET_TODOITEMS_FLOW, 
+                                error: error});
+                        });
+                }
 
-        getToDOItems();
-    },[]);
+            getToDoItems();
+        },[]);
+    }
+
+    GET_TODOITEM_LISTENER();
 
     const onInputCheckBoxChangeHandler = (e) => {
         const { checked , value } = e.target;
@@ -55,7 +58,6 @@ const ToDoList = ( props ) => {
     }
 
     const onMarkAsSelectedHandler = ( markAction ) => {
-        
         UpdateToDoItems(markAction, state.toDoItems, checkedItems);
         dispatch({
             type: actionTypes.END_MARK_TODOITEMS_FLOW,
@@ -65,13 +67,19 @@ const ToDoList = ( props ) => {
     }
 
     const onActiveClickHandler = () => {
-        setShowActive(true);
-        setShowCompleted(false);
+        dispatch({
+            type: actionTypes.START_SET_ACTIVE_API,
+            showActive: true,
+            showCompleted: false
+        });
     }
 
     const onCompletedClickHandler = () => {
-        setShowCompleted(true);
-        setShowActive(false);
+        dispatch({
+            type: actionTypes.START_SET_COMPLETED_API,
+            showActive: false,
+            showCompleted: true
+        });
     }
 
     const  onShowAddTaskClickkHandler = () => {
@@ -89,8 +97,8 @@ const ToDoList = ( props ) => {
             (
                 <ToDoItems 
                     toDoItems={toDoItems}
-                    showActive={showActive}
-                    showCompleted={showCompleted}
+                    showActive={state.showActive}
+                    showCompleted={state.showCompleted}
                     onInputCheckBoxChangeHandler={onInputCheckBoxChangeHandler}
                     onMarkAsSelectedHandler={onMarkAsSelectedHandler}/>                                    
             );
@@ -98,34 +106,45 @@ const ToDoList = ( props ) => {
             return list;
     }
 
-    return(
-        <div className='list'>
-            <br></br>
+    const renderAddtaskButton = () => {
+        return (
             <Button
                 buttonClass='add-task'
                 onClick ={onShowAddTaskClickkHandler}
                 title   ='Add Task'                
             />
-            <br></br>
-            {renderList()}
-            <br></br>
-             <div className='toggle-active'>
+        )
+    }
+
+    const renderToggleButtons = () => {
+        return (
+            <div className='toggle-active'>
                 <div>
                     <Button
-                        buttonClass={showActive === true ? 'active' : 'not-active'}
+                        buttonClass={state.showActive === true ? 'active' : 'not-active'}
                         onClick ={onActiveClickHandler}
                         title   ='Active'                
                     />
                 </div>
                 <div>
                     <Button
-                        buttonClass={showCompleted === true ? 'completed' : 'not-completed'}
+                        buttonClass={state.showCompleted === true ? 'completed' : 'not-completed'}
                         onClick ={onCompletedClickHandler}
                         title   ='Completed'                
                     />
 
                 </div>
             </div>
+        )
+    }
+    return(
+        <div className='list'>
+            <br></br>
+            { renderAddtaskButton() }
+            <br></br>
+            { renderList() }
+            <br></br>
+            { renderToggleButtons() }
         </div>
     );
 }; 

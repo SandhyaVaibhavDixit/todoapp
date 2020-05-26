@@ -25,21 +25,24 @@ export const ToDoItem = (props) =>{
                         <div>{title}</div>
                         <div>{description}</div>
                     </div>
-                    <div className='tag'>{tag}</div>
+                    <div className='tag'>
+                        <label className='tag-label'>{tag}</label>
+                    </div>
                 </div>
                 <div className='bottom'>
-                    <div>
+                    <div className='logo'>
                         <img 
                             className='profile-image' 
                             src={profileImage} 
                             alt='user-logo'
                         />
                     </div>
-                    <div className='member-date'>
-                        <div>{member}</div>
-                        <div className='due-date'>Due on {date}</div>
+                    <div className='member'>
+                        {member}
                     </div>
-                    <div></div>
+                    <div className='due-date'>
+                        <label className='due-date-label'>Due on {date}</label></div>
+                    {/* <div className='empty'></div> */}
                 </div>
             </div>
         )

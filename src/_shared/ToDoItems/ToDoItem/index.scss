@@ -14,21 +14,33 @@
         padding: 5px;
         margin: 5px;
 
+        .select {
+            width: 5%;
+            text-align: center;
+        }
         .title-div {
+            width: 75%;
             display: flex;
             flex-direction: column;
             text-align: left;
+            padding-left: 5px;
         }
 
         .tag {
+            width: 20%;
             text-align: center;
-            vertical-align: middle;
-            line-height: 20px;
+            display: flex;
+            justify-content: flex-end;
             height: 20px;
-            width: 10%;
-            background-color: orange;
-            border: 1px solid orange;
-            border-radius: 5px;
+
+            .tag-label{
+                background-color: orange;
+                border: 1px solid orange;
+                color: white;
+                border-radius: 5px;
+                padding-inline-start: 5px;
+                padding-inline-end: 5px;    
+            }
         }
 
         input[type=checkbox] {
@@ -59,21 +71,34 @@
         flex-direction: row;
         padding-bottom: 10px;
         
-        .member-date {
+        .logo{
+            width: 15%;
+            display: flex;
+            justify-content: center;
+        }
+        .member {
+            width: 25%;
             text-align: left;
             display: flex;
-            flex-direction: column;
-            justify-content: space-around;
+            align-items: center;
         }
 
         .due-date{
-            text-align: center;
-            vertical-align: middle;
-            line-height: 20px;
-            height: 20px;
-            background-color: greenyellow;
-            border: 1px solid greenyellow;
-            border-radius: 5px;
+            width: 60%;
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-right: 5px;
+            
+            .due-date-label{
+                background-color: #30f9b0;
+                border: 1px solid #30f9b0;
+                color: white;
+                border-radius: 5px;    
+                padding-inline-start: 5px;
+                padding-inline-end: 5px;    
+            }
         }
     
         .profile-image {
@@ -81,7 +106,11 @@
             width: 25px;
             border: 1px solid grey;
             border-radius: 100%;
-            margin-bottom: 10px;
+           // margin-bottom: 10px;
         }
+        
+        // .empty {
+        //     width: 20%;
+        // }
     }
 }

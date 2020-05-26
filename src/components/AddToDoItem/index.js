@@ -31,23 +31,31 @@ const AddToDoItem = (props) => {
                 });
     }
 
-    const renderForm = () => (
-        <div className='form'>
+    const renderHeader = () => {
+        return (
             <div>
                 <h5>Add To-Do deatils</h5>
             </div>
+        )
+    }
+
+    const renderForm = () => {
+        return (
             <AddForm
                 formInputs={formInputs}
                 data={state}
                 updateParentState={updateState}
                 onSubmitHandler={onSubmitHandler}
             />
-        </div>
-    );
+        )
+    }
 
     return (
-         renderForm() 
+        <div className='form'>
+         { renderHeader() }
+         { renderForm() } 
+         </div>
     );
 }
 
-export default withRouter(AddToDoItem);
+export const EnhancedAddItem = withRouter(AddToDoItem);

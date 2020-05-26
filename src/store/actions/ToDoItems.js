@@ -26,3 +26,17 @@ export const end_mark_todoitems_flow = ( actionType ) => {
         actionType: actionType
     }
 };
+
+export const start_set_active_api = (actionType) => {
+    return {
+        type: actionTypes.START_SET_ACTIVE_API,
+        actionType: actionType
+    }
+};
+
+export const start_set_completed_api = (actionType) => {
+    return {
+        type: actionTypes.START_SET_COMPLETED_API,
+        actionType: actionType
+    }
+}
